@@ -22,53 +22,67 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
 
+        createButtonDesign()
+        myTableViewSetting()
+        searchControllerSetting()
+        
+        super.viewDidLoad()
+    }
+    
+    func createButtonDesign() {
+        
         createButton.layer.cornerRadius = 30
         createButton.layer.borderWidth = 1
         createButton.layer.borderColor = UIColor.black.cgColor
         createButton.setImage(UIImage(systemName: "plus"), for: .normal)
         createButton.clipsToBounds = true
+    }
+    
+    func myTableViewSetting() {
         
         myTableView.delegate = self
         myTableView.dataSource = self
+        myTableView.tableHeaderView = searchController.searchBar
+        myTableView.register(MyMemoList.nib(), forCellReuseIdentifier: MyMemoList.identifier)
+    }
+    
+    func searchControllerSetting() {
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
         definesPresentationContext = true
-        
-        myTableView.tableHeaderView = searchController.searchBar
-        myTableView.register(MyMemoList.nib(), forCellReuseIdentifier: MyMemoList.identifier)
-        
-        
-        super.viewDidLoad()
     }
 
+    //MARK: MemoData Create
     @IBAction func createMemoView(_ sender: Any) {
         if searchController.isActive {
             self.searchController.dismiss(animated: false) {
             }
         }
-        guard let memoCreatVC = self.storyboard?.instantiateViewController(identifier: "MemoViewController") else { return }
+        guard let memoCreatVC = self.storyboard?.instantiateViewController(identifier: "MemoViewController") as? MemoViewController else { return }
         memoCreatVC.modalPresentationStyle = .fullScreen
         self.present(memoCreatVC, animated: true, completion: nil)
     }
     
+    //MARK: MemoData Update
     func updateMode(memoData: MemoModel, indexPath: Int?) {
         if searchController.isActive {
             self.searchController.dismiss(animated: false) {
             }
         }
-        
         guard let memoCreatVC = self.storyboard?.instantiateViewController(identifier: "MemoViewController") as? MemoViewController else { return }
         memoCreatVC.modalPresentationStyle = .fullScreen
         memoCreatVC.updateData(contentData: memoData.content, title: memoData.memoTitle, indexPath: indexPath)
         self.present(memoCreatVC, animated: true, completion: nil)
     }
     
+    //MARK: TableView Cell Count
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if ViewController.memoList.count == 0 {
             tableView.setEmptyMessage("No Data")
         } else if isFiltering {
+            tableView.restore()
             return ViewController.filterMemoData.count != 0 ? ViewController.filterMemoData.count : noData()
         } else {
             tableView.restore()
@@ -77,6 +91,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return 0
     }
     
+    //MARK: TableView Create Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
@@ -85,15 +100,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let memoData: MemoModel
         var titleText: String
         
-        if isFiltering {
-            index = (ViewController.filterMemoData.count-1) - indexPath.row
+        if isFiltering { // isFiltering 검색중인지 확인
+            index = (ViewController.filterMemoData.count-1) - indexPath.row //가장 나중에 만들어진 셀이 가장 위로가게 하기위함
             memoData = ViewController.filterMemoData[index]
         } else {
             index = (ViewController.memoList.count-1) - indexPath.row
             memoData = ViewController.memoList[index]
         }
         titleText = memoData.memoTitle
-        if titleText == "" {
+        if titleText == "" { // 제목이 없으면 해당 메모의 내용을 제목으로 뿌림
             titleText = memoData.content
         }
         cell.title.text = titleText
@@ -108,33 +123,47 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return 0
     }
     
+    //MARK: TableView Delete
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAtcion = UIContextualAction(style: .destructive, title: "삭제하기", handler: {(ac:UIContextualAction, view:UIView, suecess: (Bool) -> Void) in
-
-            ViewController.memoList.remove(at: indexPath.row)
+            var index: Int
+            let deletData: MemoModel
+            if self.isFiltering {
+                index = (ViewController.filterMemoData.count-1) - indexPath.row
+                deletData = ViewController.filterMemoData.remove(at: index)
+                index = ViewController.memoList.firstIndex(where: { $0.id == deletData.id }) ?? 0
+                ViewController.memoList.remove(at: index)
+            } else {
+                index = (ViewController.memoList.count-1) - indexPath.row
+                ViewController.memoList.remove(at: index)
+            }
             self.myTableView.deleteRows(at: [indexPath], with: .automatic)
         })
 
         return UISwipeActionsConfiguration(actions: [deleteAtcion])
     }
     
+    //MARK: TableView Cell Select
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let index: Int
+        var index: Int
         
         if isFiltering {
-            index = indexPath.row != 0 ? (ViewController.memoList.count-1) - indexPath.row : 0
+            index = (ViewController.filterMemoData.count-1) - indexPath.row
+            updateMode(memoData: ViewController.filterMemoData[index], indexPath: Optional(index))
         } else {
-            index = indexPath.row != 0 ? (ViewController.filterMemoData.count-1) - indexPath.row : 0
+            index = (ViewController.memoList.count-1) - indexPath.row
+            updateMode(memoData: ViewController.memoList[index], indexPath: Optional(index))
         }
-        updateMode(memoData: ViewController.memoList[index], indexPath: Optional(index))
+        
+        
     }
     
+    //MARK: SearchFunctions
     func filterData(_ searchText: String) {
         ViewController.filterMemoData = ViewController.memoList.filter { $0.memoTitle.contains(searchText) }
         
         myTableView.reloadData()
     }
-    
     
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
@@ -152,6 +181,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
 }
 
+//MARK: TableView No Data
 extension UITableView {
 
     func setEmptyMessage(_ message: String) {
