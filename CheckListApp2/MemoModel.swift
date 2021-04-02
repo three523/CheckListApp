@@ -12,6 +12,7 @@ class MemoModel {
     var content: String
     var dateString = ""
     let dataFormater = DateFormatter()
+    let id = UUID()
 
     
     init(memoTitle: String, content: String) {
@@ -24,6 +25,10 @@ class MemoModel {
     func update(memoTitle: String, content: String) {
         self.memoTitle = memoTitle
         self.content = content
+        dateString = dataFormater.string(from: Date())
+    }
+    
+    func updateTime() {
         dateString = dataFormater.string(from: Date())
     }
     
