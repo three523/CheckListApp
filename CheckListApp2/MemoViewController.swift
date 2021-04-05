@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MemoViewController: UIViewController {
     
@@ -13,6 +14,7 @@ class MemoViewController: UIViewController {
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet var titleName: UITextField!
     @IBOutlet var content: UITextView!
+    let persistenceManager = PersistenceManager.shared
     var mode: Int?
     var titleText = ""
     var contentText = ""
@@ -31,18 +33,23 @@ class MemoViewController: UIViewController {
     }
     
     @IBAction func createMemo(_ sender: Any) {
+        
         let memoData = MemoModel(memoTitle: titleName.text ?? "", content: content.text ?? "")
+        let persistenceManager = PersistenceManager.shared
+        
         if memoData.content == "" && memoData.memoTitle == "" {
             
             self.dismiss(animated: true, completion: nil)
         } else {
             
             if mode == nil {                                        // mode는 새로 생성인지 업데이트를 위한건지 알기위한 변수
-                ViewController.memoList.append(memoData)
+                persistenceManager.insertMemo(memo: memoData)
             } else if isUpdate(memoData: memoData) {
-                ViewController.memoList.remove(at: mode!)                         // 지우고 가장 최신데이터로 업데이트 시킨다
+                let memoList = persistenceManager.fetch(request: Memo.fetchRequest())
+                
+                persistenceManager.delete(object: memoList[mode!])
                 memoData.updateTime()
-                ViewController.memoList.append(memoData)
+                persistenceManager.insertMemo(memo: memoData)
             }
             
             self.dismiss(animated: true, completion: nil)
@@ -54,7 +61,7 @@ class MemoViewController: UIViewController {
     }
     
     func isUpdate(memoData: MemoModel) -> Bool {
-        let afterData = ViewController.memoList
-        return afterData[mode!].memoTitle != memoData.memoTitle || afterData[mode!].content != memoData.content
+        let afterData = persistenceManager.fetch(request: Memo.fetchRequest())
+        return afterData[mode!].title != memoData.memoTitle || afterData[mode!].content != memoData.content
     }
 }

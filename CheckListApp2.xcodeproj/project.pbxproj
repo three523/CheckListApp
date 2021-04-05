@@ -10,6 +10,7 @@
 		1863F00E260C742000FDAEB9 /* MemoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1863F00D260C742000FDAEB9 /* MemoModel.swift */; };
 		1863F011260C765100FDAEB9 /* MemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1863F010260C765100FDAEB9 /* MemoViewController.swift */; };
 		18656EE92614D90100D6D07D /* SearchResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18656EE82614D90100D6D07D /* SearchResultTableViewController.swift */; };
+		18659C36261AE52A003ED134 /* CheckListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C35261AE52A003ED134 /* CheckListTableViewController.swift */; };
 		18662260260B20B000A67007 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1866225F260B20B000A67007 /* AppDelegate.swift */; };
 		18662262260B20B000A67007 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18662261260B20B000A67007 /* SceneDelegate.swift */; };
 		18662264260B20B000A67007 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18662263260B20B000A67007 /* ViewController.swift */; };
@@ -19,12 +20,14 @@
 		1866226F260B20B100A67007 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1866226D260B20B100A67007 /* LaunchScreen.storyboard */; };
 		18662279260B215000A67007 /* MyMemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18662277260B215000A67007 /* MyMemoList.swift */; };
 		1866227A260B215000A67007 /* MyMemoList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18662278260B215000A67007 /* MyMemoList.xib */; };
+		187C3D852617300700D79AF5 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187C3D842617300700D79AF5 /* PersistenceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1863F00D260C742000FDAEB9 /* MemoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoModel.swift; sourceTree = "<group>"; };
 		1863F010260C765100FDAEB9 /* MemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewController.swift; sourceTree = "<group>"; };
 		18656EE82614D90100D6D07D /* SearchResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewController.swift; sourceTree = "<group>"; };
+		18659C35261AE52A003ED134 /* CheckListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListTableViewController.swift; sourceTree = "<group>"; };
 		1866225C260B20B000A67007 /* CheckListApp2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheckListApp2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1866225F260B20B000A67007 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18662261260B20B000A67007 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +39,7 @@
 		18662270260B20B100A67007 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18662277260B215000A67007 /* MyMemoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMemoList.swift; sourceTree = "<group>"; };
 		18662278260B215000A67007 /* MyMemoList.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyMemoList.xib; sourceTree = "<group>"; };
+		187C3D842617300700D79AF5 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,10 +77,12 @@
 				18662263260B20B000A67007 /* ViewController.swift */,
 				18656EE82614D90100D6D07D /* SearchResultTableViewController.swift */,
 				1863F010260C765100FDAEB9 /* MemoViewController.swift */,
+				187C3D842617300700D79AF5 /* PersistenceManager.swift */,
 				1863F00D260C742000FDAEB9 /* MemoModel.swift */,
 				18662277260B215000A67007 /* MyMemoList.swift */,
 				18662278260B215000A67007 /* MyMemoList.xib */,
 				18662265260B20B000A67007 /* Main.storyboard */,
+				18659C35261AE52A003ED134 /* CheckListTableViewController.swift */,
 				1866226B260B20B100A67007 /* Assets.xcassets */,
 				1866226D260B20B100A67007 /* LaunchScreen.storyboard */,
 				18662270260B20B100A67007 /* Info.plist */,
@@ -156,12 +162,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18659C36261AE52A003ED134 /* CheckListTableViewController.swift in Sources */,
 				18662264260B20B000A67007 /* ViewController.swift in Sources */,
 				18662260260B20B000A67007 /* AppDelegate.swift in Sources */,
 				18662262260B20B000A67007 /* SceneDelegate.swift in Sources */,
 				1866226A260B20B000A67007 /* CheckListApp2.xcdatamodeld in Sources */,
 				18656EE92614D90100D6D07D /* SearchResultTableViewController.swift in Sources */,
 				1863F011260C765100FDAEB9 /* MemoViewController.swift in Sources */,
+				187C3D852617300700D79AF5 /* PersistenceManager.swift in Sources */,
 				18662279260B215000A67007 /* MyMemoList.swift in Sources */,
 				1863F00E260C742000FDAEB9 /* MemoModel.swift in Sources */,
 			);

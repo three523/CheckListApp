@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PHa-Zy-jiB">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--메모-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="MemoListController" id="BYZ-38-t0r" customClass="ViewController" customModule="CheckListApp2" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,11 +17,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FFf-Ia-KZQ">
-                                <rect key="frame" x="0.0" y="44" width="390" height="766"/>
+                                <rect key="frame" x="0.0" y="44" width="390" height="717"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s12-C0-CCX">
-                                <rect key="frame" x="300" y="720" width="60" height="60"/>
+                                <rect key="frame" x="300" y="671" width="60" height="60"/>
                                 <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="L1o-j7-aYI"/>
@@ -45,6 +45,7 @@
                             <constraint firstItem="FFf-Ia-KZQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zkh-wS-jUy"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="메모" image="square.and.pencil" catalog="system" id="SMm-xX-ig7"/>
                     <connections>
                         <outlet property="createButton" destination="s12-C0-CCX" id="i7V-f8-vBO"/>
                         <outlet property="myTableView" destination="FFf-Ia-KZQ" id="9gY-Py-aej"/>
@@ -53,7 +54,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="49" y="129"/>
+            <point key="canvasLocation" x="1005" y="500"/>
         </scene>
         <!--Memo View Controller-->
         <scene sceneID="rDq-bp-ISZ">
@@ -108,7 +109,9 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="idq-jU-Par"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="SAVE">
+                                    <color key="titleColor" systemColor="labelColor"/>
+                                </state>
                                 <connections>
                                     <action selector="createMemo:" destination="KOj-Bq-ApV" eventType="touchUpInside" id="oDz-cY-dx2"/>
                                 </connections>
@@ -164,11 +167,84 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uZg-lW-nx8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1089" y="415"/>
+            <point key="canvasLocation" x="2032" y="500"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="ycU-w0-61O">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="PHa-Zy-jiB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="leC-Qz-OYX">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="FzU-Ia-Nkq"/>
+                        <segue destination="CVz-O5-jxx" kind="relationship" relationship="viewControllers" id="r2r-sF-f4e"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ICT-wE-HMq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="47.692307692307693" y="128.67298578199052"/>
+        </scene>
+        <!--CheckList-->
+        <scene sceneID="jWZ-Rc-pqk">
+            <objects>
+                <viewController id="CVz-O5-jxx" customClass="CheckListTableViewController" customModule="CheckListApp2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="X5R-9F-QfT">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Eqo-7R-xwb">
+                                <rect key="frame" x="0.0" y="44" width="390" height="717"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="gUY-4b-6vn">
+                                        <rect key="frame" x="0.0" y="28" width="390" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gUY-4b-6vn" id="tAd-AX-jvY">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PBt-VV-2Kp">
+                                <rect key="frame" x="310" y="682" width="60" height="58.666666666666629"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="3qo-5N-cs3"/>
+                                    <constraint firstAttribute="width" constant="60" id="Z2E-GF-zr7"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="plus.circle" catalog="system"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="oCT-WS-Frw"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="oCT-WS-Frw" firstAttribute="bottom" secondItem="Eqo-7R-xwb" secondAttribute="bottom" id="Qae-W1-0Yw"/>
+                            <constraint firstItem="oCT-WS-Frw" firstAttribute="trailing" secondItem="Eqo-7R-xwb" secondAttribute="trailing" id="Zio-Ax-yKX"/>
+                            <constraint firstItem="oCT-WS-Frw" firstAttribute="bottom" secondItem="PBt-VV-2Kp" secondAttribute="bottom" constant="20" id="bkR-oV-hxn"/>
+                            <constraint firstItem="Eqo-7R-xwb" firstAttribute="top" secondItem="oCT-WS-Frw" secondAttribute="top" id="f1h-Hh-yUe"/>
+                            <constraint firstItem="Eqo-7R-xwb" firstAttribute="leading" secondItem="oCT-WS-Frw" secondAttribute="leading" id="pkd-Yd-EAj"/>
+                            <constraint firstItem="oCT-WS-Frw" firstAttribute="trailing" secondItem="PBt-VV-2Kp" secondAttribute="trailing" constant="20" id="q6l-uX-KU5"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="CheckList" image="checkmark.square" catalog="system" id="Krk-wS-peQ"/>
+                    <connections>
+                        <outlet property="checkListTableView" destination="Eqo-7R-xwb" id="e8c-xH-c7o"/>
+                        <outlet property="plusButton" destination="PBt-VV-2Kp" id="8Qc-3S-Ow2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PDz-fK-lrs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1021.5384615384615" y="-313.50710900473933"/>
         </scene>
     </scenes>
     <resources>
         <image name="arrow.left" catalog="system" width="128" height="98"/>
+        <image name="checkmark.square" catalog="system" width="128" height="114"/>
+        <image name="plus.circle" catalog="system" width="128" height="121"/>
+        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
